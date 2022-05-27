@@ -1,26 +1,70 @@
 import 'package:codechef_example_1/config/palette.dart';
 import 'package:flutter/material.dart';
 
+// Note: Widget class is generally immutable(not change)
+// but stateful widget should apply change by state changed
+// LoginSignupScreen class which inheritances StatefulWidget also immutable
+// **
+// Note: When we should use StatefulWidget?
+// changes its state (internal state)
+// New data are arrival by constructor of child widget. e.g. new Scaffold(blah blah(changing))
+// **
+// Note: How can we change StatefulWidget's state?
+// use setState() Method; it rebuilds widget rather than manual
+//
+//
+// **
+// Overview: StatefulWidget of LoginSignupScreen
+// Grammar: inheritance from StatefulWidget makes compatible to \
+// generic type of State superclass
 class LoginSignupScreen extends StatefulWidget {
+  // **
+  // Overview: "key" makes each object special
+  // Grammar: "?" is used when Declaring Null (Null safety)
+  // ":" works as initialize function on constructor function
+  // Note: Constructor function on java = new function();
+  // super calls constructor of mother class (in case, StatefulWidget)
+  // it initializes key; from superclass of StatefulWidget - Widget
+  // it makes each object has special key; to verify and for swap
   LoginSignupScreen({Key? key}) : super(key: key);
-
+  // **
+  // Overview: call "createState()" when change needed
+  // Grammar: return type of createState Method is State<LoginSignupScreen>
+  // "=>" means return
+  // it defines createState() method of StatefulWidget
+  // when widget rebuilds, StatefulWidget just returns createState() method
+  // stateless widget returns all things on build method directly unlike StatefulWidget
   @override
   State<LoginSignupScreen> createState() => _LoginSignupScreenState();
 }
 
+// **
+// Overview: Mutable class of StatefulWidget "LoginSignupScreen"
+// Grammar: this private class extends State<StatefulWidget>,
+// get LoginSignupScreen class from top of code and
+// make it generic type of State.
+// Note: this class is mutable instead of LoginSignupScreen widget
 class _LoginSignupScreenState extends State<LoginSignupScreen> {
+  // Setting a variable
   bool isSignupScreen = true;
-
+  // **
+  // Overview: All contents about LoginSignupScreenState state
+  // because of state's generic type always inheritances StatefulWidget,
+  // build overrides the method of state<LoginSignupScreen> class
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
+      // **
+      // Overview: All objects in SafeArea
       body: SafeArea(
         // Note: Stack refers how to position children:
         // Note: stacking in front of any child
+        // When child widget is changing its state, it should be stateful widget
         child: Stack(
           children: [
-            // background image and title
+            // **
+            // Overview: "red.jpg" & "Yummy chat" background image & title
             // Note: Positioned only works in Stack widget
             // Note: Positioned specifies its position which top, left, etc
             Positioned(
@@ -29,10 +73,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
               right: 0,
               child: Container(
                 height: 300,
+                // Overview: "red.jpg"
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('image/red.jpg'), fit: BoxFit.fill),
                 ),
+                // **
+                // Overview: title "Welcome" + "to yummy chat" or "back"
+                // Makes padding, and contains its text style in children
                 child: Container(
                   padding: EdgeInsets.only(top: 90, left: 20),
                   child: Column(
@@ -70,7 +118,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 )
               ),
             ),
-            // Login and signup box
+            // **
+            // Overview: "Login" & "Signup" tab and it's box
             AnimatedPositioned(
               // Margin to 180 from top
               top: 180,
@@ -396,7 +445,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 )
               ),
             ),
-            // Right arrow button
+            // **
+            // Overview: "Right arrow" apply button
             AnimatedPositioned(
               duration: Duration(milliseconds: 500),
               top: isSignupScreen ? 430 : 390,
@@ -439,7 +489,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
               ),
             ),
-            // google sign in menu
+            // **
+            // Overview: "Sign up with google" box
             Positioned(
               top: MediaQuery.of(context).size.height - 200,
               right: 0,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:codechef_example_1/screens/main_screen.dart';
 
+// Overview: Run MyApp on main
 void main() {
   runApp(MyApp());
 }
 
+// MyApp is the
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Chatting app',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: LoginSignupScreen(),
+      // Summary: title - Chatting app, theme - blue, home - main_screen
     );
   }
 }
